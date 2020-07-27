@@ -22,7 +22,7 @@ node {
           withCredentials([string(credentialsId: 'dockerHubPassword', variable: 'dockerHubPassword')]) {
                sh "sudo docker login -u pradeepmurjwani -p ${dockerHubpassword}"
          }
-         sh "sudo docker push pradeepmurjwani/testing:0.1"
+         sh "sudo docker push pradeepmurjwani/testing:0."
       }
 
     // working, tried and tested
