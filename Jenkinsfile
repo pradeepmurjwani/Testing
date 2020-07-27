@@ -49,5 +49,5 @@ def notifyFailed() {
    def emailRecipients = "${env.EMAIL_RECIPIENTS}"
    def a = [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
    sh "echo ${a}"
-   emailext (subject: subject, body: body, to: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']])
+   emailext (subject: subject, body: body, recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']])
 }
