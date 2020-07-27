@@ -14,14 +14,14 @@ node {
     }
 
     stage ('docker build') {
-        sh "sudo docker build -t pradeepmurjwani/pipeline_springboot:0.1 ."
+        sh "sudo docker build -t pradeepmurjwani/testing:0.1 ."
     }
 
     stage ('docker image push into dockerhub') {
        withCredentials([string(credentialsId: 'dockerHubPassword', variable: 'dockerHubPassword')]) {
             sh "sudo docker login -u pradeepmurjwani -p ${dockerHubpassword}"
         }
-        sh "sudo docker push pradeepmurjwani/pipeline_springboot:0.1"
+        sh "sudo docker push pradeepmurjwani/testing:0.1"
     }
 
     // working, tried and tested
