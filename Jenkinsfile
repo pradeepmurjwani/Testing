@@ -47,9 +47,9 @@ def notifyFailed() {
    //def recipients1 = emailextrecipients([ [$class: 'RequesterRecipientProvider'] ])
    //sh "echo 1=${recipients}"
    //sh "echo 2=${recipients1}"
-   sh "echo email=${env.EMAIL_RECIPIENTS}"
-   sh "echo default=${env.DEFAULT_REPLYTO}"
-   sh "echo email2=${env.DEFAULT_RECIPIENTS}"
+   sh "echo email=${EMAIL_RECIPIENTS}"
+   sh "echo default=${DEFAULT_REPLYTO}"
+   sh "echo email2=${DEFAULT_RECIPIENTS}"
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
