@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.devops.bootcamp.CalculatorServiceTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.696 s - in com.devops.bootcamp.CalculatorServiceTest
