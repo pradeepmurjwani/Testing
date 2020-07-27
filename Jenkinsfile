@@ -43,10 +43,10 @@ node {
 } 
 
 def notifyFailed() {
-  emailext (
-      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-    )
+   def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+   def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
+   def emailRecipients = "${env.EMAIL_RECIPIENTS}";
+   sh "echo ${emailRecipients}"
+   emailext (subject: subject, body: body, to: emailRecipients)
 }
