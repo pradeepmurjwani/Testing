@@ -43,13 +43,10 @@ node {
 } 
 
 def notifyFailed() {
+   def recipients = emailextrecipients([ [$class: 'DevelopersRecipientProvider'] ])
+   sh "echo ${recipients}"
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
-   def emailRecipients = "${env.EMAIL_RECIPIENTS}"
-   //def a = [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-   sh "echo [[$class: 'DevelopersRecipientProvider']]"
-   sh "echo [[$class: 'RequesterRecipientProvider']]"
-   sh "echo "${env.EMAIL_RECIPIENTS}"
-   emailext (subject: subject, body: body, recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']])
+   emailext (subject: subject, body: body, recipientProviders: [[$class: 'DevelopersRecipientProvider']])
 }
