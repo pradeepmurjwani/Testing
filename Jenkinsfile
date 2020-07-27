@@ -1,28 +1,29 @@
 node {
-   stage('initialize') {
-        def dockerHome = tool 'maven-3.6.3'
-        def mavenHome  = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-    }
+   try {
+      stage('initialize') {
+         def dockerHome = tool 'maven-3.6.3'
+         def mavenHome  = tool 'docker'
+         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+      }
 
-    stage('git checkout') {
-        git "https://github.com/pradeepmurjwani/Testing.git"
-    }
+      stage('git checkout') {
+         git "https://github.com/pradeepmurjwani/Testing.git"
+      }
 
-    stage ('code clean, test and build') {
-        sh "mvn clean package"
-    }
+      stage ('code clean, test and build') {
+         sh "mvn clean package"
+      }
 
-    stage ('docker build') {
-        sh "sudo docker build -t pradeepmurjwani/testing:0.1 ."
-    }
+      stage ('docker build') {
+         sh "sudo docker build -t pradeepmurjwani/testing:0.1 ."
+      }
 
-    stage ('docker image push into dockerhub') {
-       withCredentials([string(credentialsId: 'dockerHubPassword', variable: 'dockerHubPassword')]) {
-            sh "sudo docker login -u pradeepmurjwani -p ${dockerHubpassword}"
-        }
-        sh "sudo docker push pradeepmurjwani/testing:0.1"
-    }
+      stage ('docker image push into dockerhub') {
+          withCredentials([string(credentialsId: 'dockerHubPassword', variable: 'dockerHubPassword')]) {
+               sh "sudo docker login -u pradeepmurjwani -p ${dockerHubpassword}"
+         }
+         sh "sudo docker push pradeepmurjwani/testing:0.1"
+      }
 
     // working, tried and tested
    // stage ('push into pcf via cf command') {
@@ -36,4 +37,16 @@ node {
     // stage('push into pcf via CloudFoundry plugin') {
     //      pushToCloudFoundry manifestChoice: [manifestFile: 'cicd-pipeline-manifest.yml'], cloudSpace: 'development', credentialsId: 'pcfUserAndPswd', organization: 'pradeep.m.murjwani.org', target: 'api.run.pivotal.io'
     // }
+   } catch(e) {
+      notifyFailed()
+   }
 } 
+
+def notifyFailed() {
+  emailext (
+      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    )
+}
