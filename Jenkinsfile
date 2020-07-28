@@ -14,6 +14,13 @@ node {
          sh "mvn clean package"
       }
 
+      stage('SonarQube analysis') {
+         def scannerHome = tool 'sonarqube-scanner';
+         withSonarQubeEnv('sonarqube-server') { 
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+      }
+      
       stage ('docker build') {
          sh "sudo docker build -t pradeepmurjwani/testing:0.1 ."
       }
