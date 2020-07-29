@@ -44,5 +44,5 @@ def notifyFailed() {
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>"""
    
-   emailext body: "${body}", mimeType: 'text/html', replyTo: 'pradeep.m.murjwani@gmail.com', subject: "${subject}", to: "${toEmailAddress}"
+   emailext body: "${body}", mimeType: 'text/html', cc: 'wantsomegetsome@gmail.com', subject: "${subject}", to: "${toEmailAddress}"
 }
