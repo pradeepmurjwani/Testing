@@ -50,12 +50,11 @@ def notifyFailed() {
       if (i != (ccEmailAddressArray.size()-1)) {
          finalccEmailAddress = finalccEmailAddress + "," + "cc:"
       }
-      //sh "echo ${finalccEmailAddress}"
    }
    sh "echo ${finalccEmailAddress}"
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>"""
    
-   emailext body: "${body}", mimeType: 'text/html', subject: "${subject}", to: "${toEmailAddress}, cc:${ccEmailAddress}, cc:itsspy_2050@yahoo.com"
+   emailext body: "${body}", mimeType: 'text/html', subject: "${subject}", to: "${toEmailAddress}, cc:${finalccEmailAddress}"
 }
