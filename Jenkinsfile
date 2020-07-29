@@ -39,7 +39,7 @@ node {
 } 
 
 def notifyFailed() {
-   def toEmailAddress = "pradeep.m.murjwani@gmail.com, itsspy_2050@yahoo.com"
+   def toEmailAddress = "pradeep.m.murjwani@gmail.com"
    def ccEmailAddress = "wantsomegetsome@gmail.com, itsspy_2050@yahoo.com"
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
