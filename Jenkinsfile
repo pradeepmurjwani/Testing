@@ -41,7 +41,7 @@ node {
 def notifyFailed() {
    //input
    def toEmailAddress = "pradeep.m.murjwani@gmail.com"
-   def ccEmailAddress = "wantsomegetsome@gmail.com,itsspy_2050@yahoo.com"
+   def ccEmailAddress = ""
    
    def ccEmailAddressArray = ccEmailAddress.split(",")
    def finalccEmailAddress = ""
