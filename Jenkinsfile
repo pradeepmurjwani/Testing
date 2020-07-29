@@ -44,13 +44,13 @@ def notifyFailed() {
    def ccEmailAddress = "wantsomegetsome@gmail.com,itsspy_2050@yahoo.com"
    
    def ccEmailAddressArray = ccEmailAddress.split(",")
-   sh "echo ${ccEmailAddressArray}"
    def finalccEmailAddress = ""
    for (int i = 0; i < ccEmailAddressArray.size(); i++) { 
       finalccEmailAddress = ccEmailAddressArray[i]
       if (i != (ccEmailAddressArray.size()-1)) {
          finalccEmailAddress = finalccEmailAddress + "," + "cc:"
       }
+      sh "echo ${finalccEmailAddress}"
    }
    sh "echo ${finalccEmailAddress}"
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
