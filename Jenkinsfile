@@ -44,6 +44,7 @@ def notifyFailed() {
    def ccEmailAddress = "wantsomegetsome@gmail.com,itsspy_2050@yahoo.com"
    
    def ccEmailAddressArray = ccEmailAddress.split(",")
+   sh "echo ${ccEmailAddressArray}"
    def finalccEmailAddress = ""
    for (int i = 0; i < ccEmailAddressArray.size(); i++) { 
       finalccEmailAddress = ccEmailAddressArray[i]
