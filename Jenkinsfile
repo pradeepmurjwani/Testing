@@ -39,22 +39,29 @@ node {
 } 
 
 def notifyFailed() {
-   //input
+   //to email address (multiple email address can be put by comma seperated
    def toEmailAddress = "pradeep.m.murjwani@gmail.com"
-   def ccEmailAddress = ""
    
+   //cc email address (multiple email address can be put by comma seperated
+   def ccEmailAddress = "wantsomegetsome@gmail.com,itsspy_2050@yahoo.com"
+   
+   //email extension plugin requires every cc keyword for multiple cc email address(like cc:<email-1>, cc:<email-2>...), so that's the below logic is written
    def ccEmailAddressArray = ccEmailAddress.split(",")
    def finalccEmailAddress = ""
    for (int i = 0; i < ccEmailAddressArray.size(); i++) { 
-      finalccEmailAddress = finalccEmailAddress + ccEmailAddressArray[i]
+      finalccEmailAddress = finalccEmailAddress + (ccEmailAddressArray[i].trim())
       if (i != (ccEmailAddressArray.size()-1)) {
          finalccEmailAddress = finalccEmailAddress + "," + "cc:"
       }
    }
-   sh "echo ${finalccEmailAddress}"
+   
+   //subject
    def subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+   
+   //body
    def body = """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>"""
    
+   //email extension plugin method
    emailext body: "${body}", mimeType: 'text/html', subject: "${subject}", to: "${toEmailAddress}, cc:${finalccEmailAddress}"
 }
