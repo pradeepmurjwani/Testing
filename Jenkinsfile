@@ -17,9 +17,9 @@ node {
 
       stage('SonarQube analysis') {
          withSonarQubeEnv('sonarqube-server') { 
-            sh "mvn sonar:sonar"
+            //sh "mvn sonar:sonar"
+            sh "sonar-scanner"
           }
-        // sh "sonar-scanner"
       }
       
       stage ('docker build') {
