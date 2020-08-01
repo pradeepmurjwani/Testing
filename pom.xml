@@ -76,6 +76,7 @@
 
 	<properties>
 	    <maven.compiler.source>1.8</maven.compiler.source>
+	    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 </project>
