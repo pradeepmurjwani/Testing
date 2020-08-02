@@ -31,8 +31,8 @@
     <version>${jacoco.version}</version>
     <configuration>
         <skip>${maven.test.skip}</skip>
-        <destFile>${basedir}/target/site/jacoco/jacoco.xml</destFile>
-        <dataFile>${basedir}/target/site/jacoco/jacoco.xml</dataFile>
+        <destFile>${sonar.coverage.jacoco.xmlReportPaths}</destFile>
+        <dataFile>${sonar.coverage.jacoco.xmlReportPaths}</dataFile>
         <output>file</output>
         <append>true</append>
         <excludes>
@@ -92,7 +92,7 @@
 
 	<properties>
 	    <maven.compiler.source>1.8</maven.compiler.source>
-		
+	    <jacoco.version>0.8.3</jacoco.version>
 	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
             <sonar.language>java</sonar.language>
