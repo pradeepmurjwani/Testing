@@ -32,8 +32,8 @@
     <version>${jacoco.version}</version>
     <configuration>
         <skip>${maven.test.skip}</skip>
-        <destFile>${sonar.coverage.jacoco.xmlReportPaths}</destFile>
-        <dataFile>${sonar.coverage.jacoco.xmlReportPaths}</dataFile>
+        <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+        <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
         <output>file</output>
         <append>true</append>
         <excludes>
@@ -116,7 +116,7 @@
 	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
             <sonar.language>java</sonar.language>
-	    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}target/site/jacoco/jacoco.exec</sonar.coverage.jacoco.xmlReportPaths>
-	</properties>
+	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+       	</properties>
 
 </project>
